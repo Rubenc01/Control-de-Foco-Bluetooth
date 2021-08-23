@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>NEXTGEN - SENSE</title>
+    </head>
+    <body>
+        <h1>Control de Foco</h1>
+        <!--<button onclick="encender()">Encender</button>-->
+        <button id='script' type="button" name="scriptbutton" value=" Run Script " onclick="encender()">
+        <img id="foto" src="off.jpg" width="200px" heigth="100px">
+        <button onclick="apagar()">Apagar</button>
+	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+	<!--<script type="text/javascript" src="./../app.js"></script>-->
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!--<script src="public/app.js"></script>-->
+	<script>
+		function encender() { 
+        	        var img = document.getElementById('foto');
+                	img.src= "on.jpg";		
+			const url = 'http://10.200.25.154:3000/sens/on/'
+			const http = new XMLHttpRequest()
+
+			http.open("GET", url)
+			http.onreadystatechange = function(){
+
+				if(this.readyState == 4 && this.status == 200){
+					var resultado = JSON.parse(this.responseText)
+					console.log(resultado.name)
+				}
+			}
+			http.send()			
+		}            	
+		function apagar() {
+                var img = document.getElementById('foto');
+                img.src= "off.jpg";
+		const url = 'http://10.200.25.154:3000/sens/off/'
+		const http = new XMLHttpRequest()
+
+		http.open("GET", url)
+		http.onreadystatechange = function(){
+
+			if(this.readyState == 4 && this.status == 200){
+				var resultado = JSON.parse(this.responseText)
+				console.log(resultado.name)
+			}
+		}
+		http.send()
+		}
+        </script>
+    </body>
+</html>
